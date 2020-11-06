@@ -71,10 +71,12 @@ if INPUTS.Loop == 1
 end
 
 Gas = zeros(NrHoursLoop,4);
-Gas(:,1) = MODEL.VAR.VAL.InjectGas(1:24)';
-Gas(:,2) = MODEL.VAR.VAL.WithdrawGas(1:24)';
-Gas(:,3) = MODEL.VAR.VAL.GasStorageLevel(1:24)';
-Gas(:,4) = Gas(:,1) * INPUTS.GASSTORAGE.InjCosts / 1000;
+if INPUTS.isGasStorage
+   Gas(:,1) = MODEL.VAR.VAL.InjectGas(1:24)';
+   Gas(:,2) = MODEL.VAR.VAL.WithdrawGas(1:24)';
+   Gas(:,3) = MODEL.VAR.VAL.GasStorageLevel(1:24)';
+   Gas(:,4) = Gas(:,1) * INPUTS.GASSTORAGE.InjCosts / 1000;
+end
 OUTPUTS.Gas(Ind1-Help1:Ind2-Help1,:) = Gas(:,:);
 
 %% Heat Buffer

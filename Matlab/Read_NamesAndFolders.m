@@ -27,32 +27,32 @@ global INIT
 %%  ***********************************************************************
 %%
 
-if ~isdeployed
-    FolderPath = [ cd, INIT.slash, 'Matlab', INIT.slash, 'Datenbank', INIT.slash, 'GUISettings.txt'];
-else
-    FolderPath = ['GUISettings.txt'];
-end
+% if ~isdeployed
+%     FolderPath = [ cd, INIT.slash, 'Matlab', INIT.slash, 'Datenbank', INIT.slash, 'GUISettings.txt'];
+% else
+%     FolderPath = ['GUISettings.txt'];
+% end
+% 
+% fid = fopen(FolderPath,'r');
+% 
+% % Read the data from txt-file
+% fieldNames = '%s ';
+% for i = 1:2
+%   fieldNames = [fieldNames, '%s '];
+% end
+%     
+% data = textscan(fid, fieldNames, 'Delimiter', '\t');
 
-fid = fopen(FolderPath,'r');
+INIT.FullDashboardName = 'Biogas Flex_inputfile.xls'; 
+INIT.OutputfolderName = 'C:\Users\Ugur\Desktop\KYOS Projects\2020\Farmers\Model\Biogas Flex (20140324)\Output'; 
+INIT.InputfolderName = 'C:\Users\Ugur\Desktop\KYOS Projects\2020\Farmers\Model\Biogas Flex (20140324)\Inputs'; 
 
-% Read the data from txt-file
-fieldNames = '%s ';
-for i = 1:2
-  fieldNames = [fieldNames, '%s '];
-end
-    
-data = textscan(fid, fieldNames, 'Delimiter', '\t');
-
-INIT.FullDashboardName = char(data{1,1}(1)); 
-INIT.OutputfolderName = char(data{1,1}(2)); 
-INIT.InputfolderName = char(data{1,1}(3)); 
-
-if strncmp(char(data{1,1}(1)),'"', 1) == 1
-  FolderNames = textread(FolderPath,'%q');
-  INIT.FullDashboardName= char(FolderNames(1));
-  INIT.OutputfolderName = char(FolderNames(2));
-  INIT.InputfolderName = char(FolderNames(3));
-end
+% if strncmp(char(data{1,1}(1)),'"', 1) == 1
+%   FolderNames = textread(FolderPath,'%q');
+%   INIT.FullDashboardName= char(FolderNames(1));
+%   INIT.OutputfolderName = char(FolderNames(2));
+%   INIT.InputfolderName = char(FolderNames(3));
+% end
 
 ind1 = find(INIT.FullDashboardName==INIT.slash,1,'last')+1;
 ind2 = length(INIT.FullDashboardName);

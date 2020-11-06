@@ -6,13 +6,15 @@ MODEL.OBJ.Value = obj;
   
 x = mxlpsolve('get_variables', MODEL.LP);
 
-MODEL.VAR.VAL.InjectGas =  x(MODEL.VAR.ID.InjectGas)';
-MODEL.VAR.VAL.WithdrawGas = x(MODEL.VAR.ID.WithdrawGas)';
+if INPUTS.isGasStorage
+   MODEL.VAR.VAL.InjectGas =  x(MODEL.VAR.ID.InjectGas)';
+   MODEL.VAR.VAL.WithdrawGas = x(MODEL.VAR.ID.WithdrawGas)';
+   MODEL.VAR.VAL.GasStorageLevel = x(MODEL.VAR.ID.GasStorageLevel)';
+end
 
 MODEL.VAR.VAL.InjectHeat = x(MODEL.VAR.ID.InjectHeat)';
 MODEL.VAR.VAL.WithdrawHeat = x(MODEL.VAR.ID.WithdrawHeat)';
 
-MODEL.VAR.VAL.GasStorageLevel = x(MODEL.VAR.ID.GasStorageLevel)';
 MODEL.VAR.VAL.HeatBufferLevel = x(MODEL.VAR.ID.HeatBufferLevel)';
 
 MODEL.VAR.VAL.RunCHP = [];

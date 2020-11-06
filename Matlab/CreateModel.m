@@ -1,29 +1,40 @@
 function CreateModel
 
-% Create Variables
-VarInjectGasStorage;
-VarWithdrawGasStorage;
+global INPUTS
 
+
+%%  Create Variables
+disp('Creating model variables...')
+
+% gas storage related variables
+if INPUTS.isGasStorage
+   VarInjectGasStorage;
+   VarWithdrawGasStorage;
+   VarGasStorageLevel;
+end
+
+% heat bufer related variables
 VarInjectHeatBuffer;
 VarWithdrawHeatBuffer;
-
-VarGasStorageLevel;
 VarHeatBufferLevel;
 
 VarMinLoad;
-
 VarRunCHP;
-
 VarStartUp;
 
 % Create Constraints
+disp('Creating model constraints...')
 ConStartUp;
 ConMaxStarts;
 ConMinLoad;
-ConGasStorage;
+
+if INPUTS.isGasStorage
+   ConGasStorage;
+end
 ConHeatBuffer;
 ConHeatDemand;
 ConCHP;
 
 % Objective function
+disp('Creating objective function...')
 Objective;

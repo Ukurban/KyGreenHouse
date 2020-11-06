@@ -23,7 +23,7 @@ global MODEL INPUTS PRICES
        obj(MODEL.VAR.ID.RunCHP(:,c)) = -(PRICES.POWER.EEX(INPUTS.Ind1:INPUTS.Ind2) - INPUTS.BHKW.VOM(c) - ...
            1/INPUTS.BHKW.MaxEff(c) * PRICES.GAS.Price(INPUTS.Ind1:INPUTS.Ind2));  
     end
-    obj(MODEL.VAR.ID.InjectGas) = INPUTS.GASSTORAGE.InjCosts;
+%    obj(MODEL.VAR.ID.InjectGas) = INPUTS.GASSTORAGE.InjCosts;
  
  end
  

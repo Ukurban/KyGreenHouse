@@ -158,3 +158,4 @@ PRICES.GAS.Date = PRICES.POWER.Date;
 PRICES.GAS.Hour = PRICES.POWER.Hour;
 PRICES.GAS.DateAndHour = PRICES.POWER.DateAndHour;
 PRICES.GAS.Price = zeros(length(PRICES.GAS.Date),1);
+PRICES.GAS.Price(:,1) = 15;
