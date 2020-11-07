@@ -26,7 +26,7 @@ global INIT
 % % 
 %%  ***********************************************************************
 %%
-
+slash = filesep();
 % if ~isdeployed
 %     FolderPath = [ cd, INIT.slash, 'Matlab', INIT.slash, 'Datenbank', INIT.slash, 'GUISettings.txt'];
 % else
@@ -44,8 +44,8 @@ global INIT
 % data = textscan(fid, fieldNames, 'Delimiter', '\t');
 
 INIT.FullDashboardName = 'Biogas Flex_inputfile.xls'; 
-INIT.OutputfolderName = 'C:\Users\Ugur\Desktop\KYOS Projects\2020\Farmers\Model\Biogas Flex (20140324)\Output'; 
-INIT.InputfolderName = 'C:\Users\Ugur\Desktop\KYOS Projects\2020\Farmers\Model\Biogas Flex (20140324)\Inputs'; 
+INIT.OutputfolderName = [cd, slash, 'Output']; 
+INIT.InputfolderName = [cd, slash, 'Inputs']; 
 
 % if strncmp(char(data{1,1}(1)),'"', 1) == 1
 %   FolderNames = textread(FolderPath,'%q');

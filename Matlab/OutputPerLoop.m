@@ -91,6 +91,7 @@ Heat(:,3) = MODEL.VAR.VAL.HeatBufferLevel(1:24)';
 for j = 2:NrHoursLoop
   Heat(j,4) = MODEL.VAR.VAL.HeatBufferLevel(j-1) * INPUTS.HEATBUFFER.HeatLoss;
 end
+% Heat(:,5) = MODEL.VAR.VAL
 
 OUTPUTS.Heat(Ind1-Help1:Ind2-Help1,:) = Heat(:,:);
 

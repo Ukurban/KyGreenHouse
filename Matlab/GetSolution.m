@@ -16,6 +16,7 @@ MODEL.VAR.VAL.InjectHeat = x(MODEL.VAR.ID.InjectHeat)';
 MODEL.VAR.VAL.WithdrawHeat = x(MODEL.VAR.ID.WithdrawHeat)';
 
 MODEL.VAR.VAL.HeatBufferLevel = x(MODEL.VAR.ID.HeatBufferLevel)';
+MODEL.VAR.VAL.HeatBoilers = x(MODEL.VAR.ID.RunBoiler)';
 
 MODEL.VAR.VAL.RunCHP = [];
 for c = 1:INPUTS.NrCHP

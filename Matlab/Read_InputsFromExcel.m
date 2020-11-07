@@ -54,6 +54,14 @@ INPUTS.IMBALANCE.Long = DataN(30,10);
 INPUTS.MaxProd = 0;
 INPUTS.MinProd = zeros(3,1);
 
+% TODO : Read From Files
+INPUTS.NrBoilers = 1;
+% INPUTS.BOILERS.MaxHeatCapacity = zeros(NrBoilers,1); 
+% INPUTS.BOILERS.MaxEff = zeros(NrBoilers,1); 
+INPUTS.BOILERS.MaxHeatCapacity = 30000; 
+INPUTS.BOILERS.MaxEff = 0.92; 
+% 
+
 for c = 1:3
   if strcmpi(INPUTS.BHKW.Include(c),'Yes')  
     INPUTS.MaxProd = INPUTS.MaxProd + INPUTS.BHKW.MaxLoad(c);  

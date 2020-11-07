@@ -21,7 +21,9 @@ VarHeatBufferLevel;
 VarMinLoad;
 VarRunCHP;
 VarStartUp;
-
+if INPUTS.isBoiler
+   VarBoiler;
+end
 % Create Constraints
 disp('Creating model constraints...')
 ConStartUp;
@@ -34,6 +36,7 @@ end
 ConHeatBuffer;
 ConHeatDemand;
 ConCHP;
+ConCommittedLoad
 
 % Objective function
 disp('Creating objective function...')

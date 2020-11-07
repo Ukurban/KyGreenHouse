@@ -159,3 +159,57 @@ PRICES.GAS.Hour = PRICES.POWER.Hour;
 PRICES.GAS.DateAndHour = PRICES.POWER.DateAndHour;
 PRICES.GAS.Price = zeros(length(PRICES.GAS.Date),1);
 PRICES.GAS.Price(:,1) = 15;
+
+
+%% Read Hourly Heat Demand
+Inputfile = [INIT.InputfolderName, INIT.slash, 'MinProduction.xls'];
+xls_check_if_open(Inputfile,'close');
+[DataN, DataT] = xlsread(Inputfile);
+
+Years = DataN(1,2:end);
+StartDate = datenum(Years(1),1,1);
+EndDate = datenum(Years(1,end),12,31);
+NrDays = (EndDate - StartDate + 1);
+NrHours = (EndDate - StartDate + 1) * 24;
+NrYears = Years(end) - Years(1) + 1;
+
+d = (StartDate:EndDate);
+Hour2day = zeros(NrHours,1);
+d24 = repmat(d,24,1);
+Hour2day = d24(:);
+
+Hour = zeros(24,1);
+for i=1:24
+  Hour(i) = (i-1)/24;
+end
+HoursArray = repmat(Hour,NrDays,1);
+
+Date = Hour2day;
+Hour = HoursArray;
+DateAndHour = Date + Hour;
+
+PRICES.COMMITTEDLOAD.Date = Date;
+PRICES.COMMITTEDLOAD.Hour = Hour;
+PRICES.COMMITTEDLOAD.DateAndHour = DateAndHour;
+
+PRICES.COMMITTEDLOAD.MinProduction = zeros(length(PRICES.COMMITTEDLOAD.Date),1);
+
+indend = 0;
+indbegin = 1;
+
+for i = 1:NrYears
+    
+  ind = ~isnan(DataN(2:end,1+i));
+  ind2 = find(ind == 0,1,'first');
+  if isempty(ind2)
+    ind2 = 8785;
+  end
+  demand = DataN(2:ind2,1+i);
+
+  indend = indend + ind2 - 1;
+  MinProduction(indbegin:indend,1) = demand;
+  indbegin = indend + 1;
+
+end
+
+PRICES.COMMITTEDLOAD.MinProduction = MinProduction;

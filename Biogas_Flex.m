@@ -35,6 +35,18 @@ Read_InputsFromExcel;
 disp('Read price data and heat profile');
 Read_PriceData_HeatDemand;
 
+
+%% Configuration for EPEX Module
+INPUTS.isFullLoadHours = false;
+INPUTS.isGasStorage = false;
+
+INPUTS.isBoiler = true;
+INPUTS.isGasPrice = true;
+INPUTS.isPowerDemand = true;
+INPUTS.isCarbonDemand = true;
+
+
+
 %% Create loops 
 for j = 1:INPUTS.ImbalanceLoop
   INPUTS.ImbalanceLoopNr = j;
@@ -47,13 +59,17 @@ for j = 1:INPUTS.ImbalanceLoop
   
   for i = 1:INPUTS.NrOfLoops
     
-    if i == 1
-      INPUTS.STORAGE.Volume = INPUTS.GASSTORAGE.StartVolume;
-      INPUTS.HEATBUFFER.Volume = INPUTS.HEATBUFFER.StartVolume;
-    else
-      INPUTS.STORAGE.Volume = MODEL.VAR.VAL.GasStorageLevel(24);
-      INPUTS.HEATBUFFER.Volume = MODEL.VAR.VAL.HeatBufferLevel(24) ;
-    end
+     if i == 1
+        if INPUTS.isGasStorage
+           INPUTS.STORAGE.Volume = INPUTS.GASSTORAGE.StartVolume;
+        end
+        INPUTS.HEATBUFFER.Volume = INPUTS.HEATBUFFER.StartVolume;
+     else
+        if INPUTS.isGasStorage
+           INPUTS.STORAGE.Volume = MODEL.VAR.VAL.GasStorageLevel(24);
+        end
+        INPUTS.HEATBUFFER.Volume = MODEL.VAR.VAL.HeatBufferLevel(24) ;
+     end
 
     % Process data
     INPUTS.Loop = i;
